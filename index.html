@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王盈盈 · 抽象满屏飞舞</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            width: 100vw;
+            height: 100vh;
+            background: #0f0f1a;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 核心：名字乱飞动画 */
+        .name {
+            position: absolute;
+            color: #fff;
+            font-weight: bold;
+            white-space: nowrap;
+            animation: fly 8s linear infinite;
+            /* 随机透明度 */
+            opacity: 0.8;
+            /* 禁止选中 */
+            user-select: none;
+        }
+
+        /* 飘移动画 */
+        @keyframes fly {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(80px, -60px) rotate(15deg);
+            }
+            50% {
+                transform: translate(-50px, 90px) rotate(-10deg);
+            }
+            75% {
+                transform: translate(100px, -30px) rotate(5deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // 生成满屏乱飞的 王盈盈
+        function createNames() {
+            // 生成100个名字，铺满屏幕
+            for (let i = 0; i < 100; i++) {
+                let span = document.createElement('span');
+                span.className = 'name';
+                span.innerText = '王盈盈';
+                
+                // 随机位置
+                span.style.left = Math.random() * 100 + 'vw';
+                span.style.top = Math.random() * 100 + 'vh';
+                
+                // 随机大小
+                let size = 14 + Math.random() * 36;
+                span.style.fontSize = size + 'px';
+                
+                // 随机颜色
+                let r = Math.floor(Math.random() * 255);
+                let g = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                span.style.color = `rgb(${r}, ${g}, ${b})`;
+                
+                // 随机动画速度
+                let speed = 5 + Math.random() * 10;
+                span.style.animationDuration = speed + 's';
+                
+                // 随机延迟
+                span.style.animationDelay = Math.random() * 5 + 's';
+
+                document.body.appendChild(span);
+            }
+        }
+
+        // 执行生成
+        createNames();
+    </script>
+</body>
+</html>
